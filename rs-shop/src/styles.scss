@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@include mat.core();
+$rs-shop-primary: mat.define-palette(mat.$indigo-palette);
+$rs-shop-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$rs-shop-warn: mat.define-palette(mat.$red-palette);
+$rs-shop-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $rs-shop-primary,
+      accent: $rs-shop-accent,
+      warn: $rs-shop-warn,
+    ),
+  )
+);
+@include mat.all-component-themes($rs-shop-theme);
+
+:root {
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --gray: #909399;
+  --light-gray: #b0b3b8;
+  //--blue: #0077cc;
+  --green: #00717D;
+  --hover-orange: #F05128;
+  --hover-orange-opacity: rgba(240, 81, 40, 0.2);
+  //--hover-pink: #d62761;
+  //--hover-pink-opacity: rgba(214, 39, 97, 0.2);
+  --hover-green: #00474e;
+  //--hover-blue: #006ebd;
+  --header-bg-color: #f7f8fa;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: Arial, sans-serif;
+  color: var(--black);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1090px;
+
+  margin: 0 auto;
+  padding: 0 25px;
+}
