@@ -12,7 +12,10 @@ import { ModalLocationComponent } from '../modal-location/modal-location.compone
 import { GetLocationService } from '../../services/get-location.service';
 import { IStore } from '../../../redux/state.model';
 import { getUserLocation } from '../../../redux/selectors/user-settings.selector';
-import { setUserLocation } from '../../../redux/actions/user-location.action';
+import { setUserLocationAction } from '../../../redux/actions/user-location.action';
+import { ICategory } from '../../types/category.type';
+import { getCategories } from '../../../redux/selectors/get-categories.selector';
+import { loadCategoriesAction } from '../../../redux/actions/load-categories.action';
 
 @Component({
   selector: 'app-header',
@@ -24,14 +27,7 @@ export class HeaderComponent implements OnInit {
   userCity$!: Observable<string>;
   submenuPurchaseTermsToggle = false;
   submenuContactsToggle = false;
-  categoties = [
-    'Холодильники',
-    'Стиральные машины',
-    'Ноутбуки',
-    'Смартфоны',
-    'Матрасы',
-    'Межкомнатные двери',
-  ];
+  categories$!: Observable<ICategory[]>;
 
   constructor(
     public modalLocation: MatDialog,
@@ -43,13 +39,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.getLocationService.getLocation$().subscribe((initialCity) => {
       this.store.dispatch(
-        setUserLocation({
+        setUserLocationAction({
           city: initialCity,
         }),
       );
     });
 
     this.userCity$ = this.store.select(getUserLocation);
+
+    this.store.dispatch(loadCategoriesAction());
+    this.categories$ = this.store.select(getCategories);
   }
 
   openModalLocation() {

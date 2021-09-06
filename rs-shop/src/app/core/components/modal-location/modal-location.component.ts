@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IStore } from '../../../redux/state.model';
-import { setUserLocation } from '../../../redux/actions/user-location.action';
+import { setUserLocationAction } from '../../../redux/actions/user-location.action';
 import { cities } from '../../../constants/locations';
 
 @Component({
@@ -22,7 +22,7 @@ export class ModalLocationComponent {
 
   setUserCity() {
     this.store.dispatch(
-      setUserLocation({
+      setUserLocationAction({
         city: this.selectedValue,
       }),
     );

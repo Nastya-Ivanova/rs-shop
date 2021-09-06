@@ -114,8 +114,8 @@
   </div>
   <div class="header__categoties">
     <ul class="header__categoties-list container">
-      <li *ngFor="let category of categoties" class="header__categoties-item">
-        <a class="header__categoties-link" href="">{{category}}</a>
+      <li *ngFor="let category of categories$ | async" class="header__categoties-item">
+        <a class="header__categoties-link" href="">{{category.name}}</a>
       </li>
     </ul>
   </div>
