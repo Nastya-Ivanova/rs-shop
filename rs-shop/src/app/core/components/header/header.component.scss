@@ -132,7 +132,7 @@
 
   &:hover:after,
   &:active:after {
-    border-top-color: var(--hover-orange);
+    border-top-color: var(--orange);
   }
 }
 
@@ -168,7 +168,7 @@
 
   &:hover,
   &:active {
-    color: var(--hover-orange);
+    color: var(--orange);
     background: var(--hover-orange-opacity);
   }
 }
@@ -184,7 +184,7 @@
 
 .header__submenu-btn:hover .icon-telegram,
 .header__submenu-btn:active .icon-telegram {
-  color: var(--hover-orange);
+  color: var(--orange);
 }
 
 .header__submenu-contacts {
@@ -216,7 +216,7 @@
 .header__btn:active,
 .header__link:hover,
 .header__link:active {
-  color: var(--hover-orange);
+  color: var(--orange);
 }
 
 .header__logo {
@@ -344,18 +344,18 @@
   background-color: var(--white);
 }
 
-.header__categoties {
-  background: linear-gradient(90deg, var(--hover-orange), #e52e6b);
+.header__categories {
+  background: linear-gradient(90deg, var(--orange), #e52e6b);
 }
 
-.header__categoties-list {
+.header__categories-list {
   display: flex;
   justify-content: center;
 
   list-style: none;
 }
 
-.header__categoties-item {
+.header__categories-item {
   margin-right: 20px;
   padding: 10px 0;
 
@@ -364,7 +364,60 @@
   }
 }
 
-.header__categoties-link {
+.header__categories-link {
   text-decoration: none;
   color: var(--white);
+}
+
+::ng-deep .mat-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__account-img {
+  display: block;
+
+  margin-bottom: 12px;
+}
+
+.header__account-sign-in-btn {
+  margin-bottom: 12px;
+  padding: 10px 24px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: var(--orange);
+  color: var(--white);
+  cursor: pointer;
+  transition: .2s ease;
+
+  &:hover,
+  &:active{
+    background-color: var(--hover-orange);
+  }
+}
+
+::ng-deep .mat-menu-panel{
+  margin-top: 10px;
+}
+
+::ng-deep .mat-menu-item.header__account-link{
+display: flex;
+justify-content: flex-start;
+align-items: center;
+
+  width: 100%;
+  height: 35px;
+  box-sizing: border-box;
+
+  &:hover,
+  &:active {
+    color: var(--orange);
+    background: var(--hover-orange-opacity);
+  }
+}
+
+.header__account-link span{
+  padding-left: 10px;
 }

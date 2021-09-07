@@ -1,10 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-  ElementRef,
-  HostListener,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,15 +19,12 @@ import { loadCategoriesAction } from '../../../redux/actions/load-categories.act
 })
 export class HeaderComponent implements OnInit {
   userCity$!: Observable<string>;
-  submenuPurchaseTermsToggle = false;
-  submenuContactsToggle = false;
   categories$!: Observable<ICategory[]>;
 
   constructor(
     public modalLocation: MatDialog,
     private getLocationService: GetLocationService,
     public store: Store<IStore>,
-    private elemRef: ElementRef,
   ) {}
 
   ngOnInit() {
@@ -53,13 +44,5 @@ export class HeaderComponent implements OnInit {
 
   openModalLocation() {
     this.modalLocation.open(ModalLocationComponent);
-  }
-
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: { target: Element }) {
-    if (!this.elemRef.nativeElement.contains(event.target)) {
-      this.submenuPurchaseTermsToggle = false;
-      this.submenuContactsToggle = false;
-    }
   }
 }
