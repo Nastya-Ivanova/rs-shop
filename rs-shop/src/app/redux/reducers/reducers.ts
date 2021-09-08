@@ -16,21 +16,12 @@ const reducer = createReducer(
     ...state,
     userSettings: { city },
   })),
-  on(loadCategoriesSuccessAction, (state, { categories }) => {
-    const res = {
-      ...state,
-      categories: [...state.categories, ...categories],
-    };
-    console.log(res);
-    return res;
-  }),
+  on(loadCategoriesSuccessAction, (state, { categories }) => ({
+    ...state,
+    categories: [...state.categories, ...categories],
+  })),
 );
 
 export function appReducer(state: IAppStore | undefined, action: Action): IAppStore {
   return reducer(state, action);
 }
-
-// on(loadCategoriesSuccessAction, (state, { categories }) => ({
-//   ...state,
-//   categories: [...state.categories, ...categories],
-// })),

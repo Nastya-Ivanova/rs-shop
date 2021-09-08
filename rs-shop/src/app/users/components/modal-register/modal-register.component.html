@@ -1,0 +1,26 @@
+<div class="modal-register">
+  <button (click)="openModalAuth()" class="modal-register__back-btn" mat-button mat-dialog-close>Назад</button>
+  <h2 class="modal-register__title" mat-dialog-title>Регистрация</h2>
+  <form (ngSubmit)="submitRegisterForm(registerForm)" #registerForm="ngForm" class="modal-register__form">
+    <label class="modal-register__label" for="firstName">Имя</label>
+    <input name="firstName" ngModel #firstName="ngModel" class="modal-register__input" id="firstName" type="text" required>
+    <p *ngIf="firstName.value === null || firstName.value.length === 0" class="modal-register__error-message">*Поле обязательно для заполнения</p>
+
+    <label class="modal-register__label" for="lastName">Фамилия</label>
+    <input name="lastName" ngModel #lastName="ngModel" class="modal-register__input" id="lastName" type="text" required>
+    <p *ngIf="lastName.value === null || lastName.value.length === 0" class="modal-register__error-message">*Поле обязательно для заполнения</p>
+
+    <label class="modal-register__label" for="email">Электронная почта</label>
+    <input name="email" ngModel #email="ngModel" email class="modal-register__input" id="email" type="email" required>
+    <p *ngIf="email.value === null || email.value.length === 0" class="modal-register__error-message">*Поле обязательно для заполнения</p>
+    <p *ngIf="email.value?.length > 0 && email.invalid" class="modal-register__error-message">Некорректный email</p>
+
+    <label class="modal-register__label" for="password">Пароль</label>
+    <input name="password" ngModel #password="ngModel" class="modal-register__input" id="password" type="password" required>
+    <p *ngIf="password.value === null || password.value.length === 0" class="modal-register__error-message">*Поле обязательно для заполнения</p>
+
+    <button [disabled]="email.invalid || password.invalid" class="modal-register__submit-btn" type="submit">Зарегистрироваться</button>
+  </form>
+</div>
+
+

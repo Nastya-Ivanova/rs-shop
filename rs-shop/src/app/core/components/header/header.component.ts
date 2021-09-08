@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   categories$!: Observable<ICategory[]>;
 
   constructor(
-    public modalLocation: MatDialog,
+    private dialog: MatDialog,
     private getLocationService: GetLocationService,
     public store: Store<IStore>,
   ) {}
@@ -43,6 +43,6 @@ export class HeaderComponent implements OnInit {
   }
 
   openModalLocation() {
-    this.modalLocation.open(ModalLocationComponent);
+    this.dialog.open(ModalLocationComponent);
   }
 }

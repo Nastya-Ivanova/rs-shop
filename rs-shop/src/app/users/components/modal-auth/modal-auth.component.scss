@@ -1,0 +1,80 @@
+.modal-auth{
+  width: 350px;
+
+  color:var(--black);
+}
+
+.modal-auth__title{
+  margin: 0 0 15px;
+
+  font-size: 18px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.modal-auth__label{
+  display: block;
+
+  margin-top: 15px;
+  padding-bottom: 4px;
+
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--gray);
+}
+
+.modal-auth__input{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px 12px;
+
+  border: 1px solid var(--gray);
+  border-radius: 2px;
+
+  font-size: 14px;
+}
+
+.modal-auth__submit-btn{
+  display: block;
+
+  margin: 25px auto 20px;
+  padding: 10px 24px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: var(--orange);
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover,
+  &:active {
+    background-color: var(--hover-orange);
+  }
+}
+
+.modal-auth__register-btn{
+  display: block;
+
+  margin: 0 auto;
+
+  border: none;
+  background: transparent;
+
+  color: var(--green);
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+.modal-auth__error-message{
+  margin: 15px 0 0;
+
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  color: #d73939;
+}
