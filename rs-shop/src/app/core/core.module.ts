@@ -6,11 +6,13 @@ import { ModalLocationComponent } from './components/modal-location/modal-locati
 import { MaterialModule } from '../shared/material/material.module';
 import { GetLocationService } from './services/get-location.service';
 import { UsersModule } from '../users/users.module';
+import { AppRoutingModule } from '../app-routing.module';
+import { SearchService } from './services/search.service';
 
 @NgModule({
   declarations: [HeaderComponent, ModalLocationComponent],
-  imports: [CommonModule, MaterialModule, FormsModule, UsersModule],
+  imports: [CommonModule, MaterialModule, FormsModule, UsersModule, AppRoutingModule],
   exports: [HeaderComponent],
-  providers: [GetLocationService],
+  providers: [GetLocationService, SearchService],
 })
 export class CoreModule {}

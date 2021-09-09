@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { reducers } from './redux/reducers';
 import { LoadCategoriesEffect } from './redux/effects/load-categories.effect';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     CoreModule,
     StoreModule.forRoot(reducers, {

@@ -7,7 +7,7 @@ import { baseUrl } from '../../constants/base-url';
 @Injectable({
   providedIn: 'root',
 })
-export class HttpService {
+export class GetCategoriesService {
   constructor(private http: HttpClient) {}
 
   getCategories$(): Observable<ICategory[]> {
