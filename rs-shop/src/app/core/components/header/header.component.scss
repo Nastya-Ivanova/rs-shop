@@ -173,6 +173,19 @@
   }
 }
 
+.header__submenu-text{
+  display: flex;
+  align-items: center;
+
+  height: 30px;
+  min-width: 185px;
+
+  padding: 0 25px;
+
+  line-height: 30px;
+  text-align: left;
+}
+
 .header__submenu-btn span {
   padding-left: 5px;
 }

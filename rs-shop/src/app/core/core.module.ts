@@ -8,11 +8,12 @@ import { GetLocationService } from './services/get-location.service';
 import { UsersModule } from '../users/users.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { SearchService } from './services/search.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [HeaderComponent, ModalLocationComponent],
+  declarations: [HeaderComponent, ModalLocationComponent, FooterComponent],
   imports: [CommonModule, MaterialModule, FormsModule, UsersModule, AppRoutingModule],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, FooterComponent],
   providers: [GetLocationService, SearchService],
 })
 export class CoreModule {}
