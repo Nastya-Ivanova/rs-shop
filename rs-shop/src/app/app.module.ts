@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { reducers } from './redux/reducers';
@@ -27,6 +29,8 @@ import { AppRoutingModule } from './app-routing.module';
       },
     }),
     EffectsModule.forRoot([LoadCategoriesEffect]),
+    BrowserAnimationsModule,
+    MatCarouselModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
