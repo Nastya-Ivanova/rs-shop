@@ -86,8 +86,6 @@
         <img src="/assets/img/nexperia-logo.svg" width="125" alt="Logo Technique">
       </a>
       <button [routerLink]="['goods']" class="header__nav-btn header__catalog-btn">Каталог товаров</button>
-
-
       <div class="header__search-form-wrapper">
         <form class="header__search-form">
           <button class="header__search-btn">
@@ -98,22 +96,21 @@
           <input
             [ngModel]="search$ | async"
             (ngModelChange)="search$.next($event)"
+            (focus)="visibleSearchResult = true"
+            (blur)="visibleSearchResult = false"
             name="search"
-            class="header__search-field" type="search" placeholder="Поиск товаров">
+            class="header__search-field" type="text" placeholder="Поиск товаров">
+          <button (click)="clearSearchInput()" type="button" class="header__search-close-btn"></button>
         </form>
-        <ul [class.hidden]="" class="header__search-list">
+        <ul [class.hidden]="!visibleSearchResult || (searchResult$ | async) === null || ''"
+            class="header__search-list">
           <li *ngFor="let searchResult of searchResult$ | async"
               class="header__search-item"
-
           >
             <a class="header__search-link" href="">{{searchResult.name}}</a>
           </li>
         </ul>
       </div>
-<!--      [class.hidden]=""-->
-<!--      searchResult$ | async-->
-<!--      [class.hidden]="(searchResult$ | async) === null || (search$ | async) === ''"-->
-
       <app-account></app-account>
       <a href="" class="header__nav-btn header__card-link">
         <svg width="17" height="16" viewBox="0 0 17 16">
@@ -130,5 +127,4 @@
       </li>
     </ul>
   </div>
-
 </div>

@@ -8,9 +8,14 @@ import { IItem } from '../types/item.type';
 export class GetItemsService {
   constructor(private http: HttpClient) {}
 
-  getItems(): Observable<IItem[]> {
+  getItems(
+    categoryId: string,
+    subCategoryId: string,
+    start: number,
+    count: number,
+  ): Observable<IItem[]> {
     return this.http.get<IItem[]>(
-      `${baseUrl}goods/category/appliances/refrigerators?start=1&count=5`,
+      `${baseUrl}goods/category/${categoryId}/${subCategoryId}?start=${start}&count=${count}`,
     );
   }
 }

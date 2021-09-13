@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalLocationComponent } from '../modal-location/modal-location.component';
 import { GetLocationService } from '../../services/get-location.service';
@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
   userCity$!: Observable<string>;
   categories$!: Observable<ICategory[]>;
   search$ = new BehaviorSubject('');
-  searchResult$!: Observable<ISearchResult[]>;
-  isSearchResult = false;
+  searchResult$!: Observable<ISearchResult[]> | null;
+  visibleSearchResult = false;
 
   constructor(
     private dialog: MatDialog,
@@ -54,17 +54,24 @@ export class HeaderComponent implements OnInit {
         distinctUntilChanged(),
       )
       .subscribe((searchStr) => {
-        console.log(searchStr);
-        // if (searchStr.length === 0) {
-        //   this.isSearchResult = false;
-        // } else {
-        //   this.isSearchResult = true;
-        // }
-        this.searchResult$ = this.searchService.getSearchResult$(searchStr);
+        this.searchResult$ = this.searchService.getSearchResult$(searchStr).pipe(
+          tap((searchResult) => {
+            if (searchResult.length === 0) {
+              this.visibleSearchResult = false;
+            } else {
+              this.visibleSearchResult = true;
+            }
+          }),
+        );
       });
   }
 
   openModalLocation() {
     this.dialog.open(ModalLocationComponent);
+  }
+
+  clearSearchInput() {
+    this.searchResult$ = null;
+    this.search$.next('');
   }
 }

@@ -1,0 +1,28 @@
+<mat-carousel
+  class="carousel carousel--popular"
+  [autoplay]="false"
+  maxWidth="1090px"
+  [hideArrows]="false"
+  [hideIndicators]="true"
+  [useKeyboard]="true"
+  [useMouseWheel]="false"
+  orientation="ltr"
+>
+  <mat-carousel-slide class="carousel__slide"
+                      *ngFor="let goods$ of goods; let i = index"
+                      [hideOverlay]="true"
+  >
+    <div *ngFor="let good of goods$ | async" class="carousel__item">
+      <div class="carousel__img-wrapper">
+        <img class="carousel__img" src="{{good.imageUrls[0]}}" alt="" height="90">
+        <div [class.visible]="good.imageUrls[0] === undefined" class="carousel__img-unknown">фото нет</div>
+      </div>
+      <div class="carousel__wrapper">
+        <a href="" class="carousel__name">{{good.name}}</a>
+        <p class="carousel__rating">рейтинг: {{good.rating}}</p>
+        <p class="carousel__price">цена: {{good.price}} руб.</p>
+      </div>
+    </div>
+  </mat-carousel-slide>
+</mat-carousel>
+

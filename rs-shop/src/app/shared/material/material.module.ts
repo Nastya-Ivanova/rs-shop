@@ -1,12 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCarouselModule } from '@ngbmodule/material-carousel';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MatDialogModule, NoopAnimationsModule, MatMenuModule],
-  exports: [MatDialogModule, NoopAnimationsModule, MatMenuModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCarouselModule,
+    MatCardModule,
+    MatButtonModule,
+  ],
+  exports: [
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCarouselModule,
+    MatCardModule,
+    MatButtonModule,
+  ],
 })
 export class MaterialModule {}

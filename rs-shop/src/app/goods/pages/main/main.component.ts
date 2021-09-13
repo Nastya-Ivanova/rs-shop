@@ -1,8 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { GetItemsService } from '../../sevices/get-items.service';
-import { IItem } from '../../types/item.type';
-import { map } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -10,14 +6,4 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent implements OnInit {
-  items$: Observable<IItem[]> = of([]);
-
-  constructor(private getItemsService: GetItemsService) {}
-
-  ngOnInit() {
-    this.items$ = this.getItemsService.getItems();
-    //.pipe(map((item, index) => (item.image = this.slides[index])));
-    //.subscribe(items => {this.items$ = items});
-  }
-}
+export class MainComponent {}

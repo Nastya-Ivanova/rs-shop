@@ -1,0 +1,85 @@
+::ng-deep div.carousel{
+  margin: 0 auto;
+}
+
+::ng-deep .carousel--popular div.carousel{
+  margin-top: 60px;
+}
+
+::ng-deep div.carousel-slide-content{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+::ng-deep.carousel div.carousel-slide{
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep.carousel div.carousel-slide-content{
+  width: 80%;
+}
+
+.carousel__wrapper{
+  padding: 0 15px;
+  width: 250px;
+}
+
+.carousel__item{
+  display: flex;
+  justify-content: space-between;
+
+  width: 33%;
+}
+
+.carousel__name,
+.carousel__rating,
+.carousel__price{
+  margin: 0;
+}
+
+.carousel__img-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.carousel__img-unknown{
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: var(--light-gray);
+}
+
+.carousel__img-unknown.visible{
+  display: flex;
+}
+
+.carousel__img{
+  max-width: 80px;
+  max-height: 80px;
+  height: auto;
+}
+
+.carousel__name{
+  display: block;
+  margin-bottom: 5px;
+
+  color: var(--blue);
+}
+
+.carousel__rating{
+  font-size: 12px;
+  color: var(--green);
+}
+
+.carousel__price{
+  font-weight: bold;
+}
