@@ -1,4 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICategory } from '../../../core/types/category.type';
@@ -11,9 +18,10 @@ import { getCategories } from '../../../redux/selectors/get-categories.selector'
   styleUrls: ['./goods.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoodsComponent implements OnInit {
+export class GoodsComponent implements OnInit, AfterViewInit {
+  @ViewChild('subcategory') subcategory!: ElementRef;
   categories$!: Observable<ICategory[]>;
-  changeText!: boolean;
+  currentVisibleSubcategoryElement!: Element;
 
   constructor(private store: Store<IStore>) {}
 
@@ -21,5 +29,21 @@ export class GoodsComponent implements OnInit {
     this.categories$ = this.store.select(getCategories);
   }
 
-  ChangeSubcategory() {}
+  ngAfterViewInit() {
+    this.currentVisibleSubcategoryElement = this.subcategory.nativeElement;
+    this.currentVisibleSubcategoryElement.classList.add('visible');
+  }
+
+  visibleSubcategory(event: Event, categoryId: string) {
+    const subcategory = (<Element>event.target).querySelector(`.${categoryId}`);
+
+    if (this.currentVisibleSubcategoryElement) {
+      this.currentVisibleSubcategoryElement.classList.remove('visible');
+    }
+
+    if (subcategory) {
+      subcategory.classList.add('visible');
+      this.currentVisibleSubcategoryElement = subcategory;
+    }
+  }
 }
