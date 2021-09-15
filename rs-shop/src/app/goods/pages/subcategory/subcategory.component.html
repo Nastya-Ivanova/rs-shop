@@ -1,0 +1,68 @@
+<div class="container">
+  <h2 class="subcategory__header">{{subcategoryName}}</h2>
+  <div class="subcategory__breadcrumbs">
+    <a [routerLink]="['/goods']" class="subcategory__breadcrumbs-link">{{categoryName}}</a>
+    <span class="subcategory__breadcrumbs-separator">></span>
+    <span class="subcategory__breadcrumbs-text">{{subcategoryName}}</span>
+  </div>
+  <div class="subcategory__sort-btn-wrapper">
+    <p>Сортировать по:</p>
+    <button
+      (click)="setSortKey('rating')"
+      [class.hidden]="!arrowRating"
+      [class.active]="arrowRating"
+      [class.rotate]="toggleArrowRotate"
+      class="subcategory__sort-btn"
+    >популярности</button>
+    <button
+      (click)="setSortKey('price')"
+      [class.hidden]="!arrowPrice"
+      [class.active]="arrowPrice"
+      [class.rotate]="toggleArrowRotate"
+      class="subcategory__sort-btn"
+    >цене</button>
+    <button (click)="resetSortBy()" class="subcategory__btn-reset"></button>
+  </div>
+  <div class="subcategory">
+    <mat-card *ngFor="let item of items$ | sortBy:sortOrder:sortKey | async" class="subcategory__card">
+      <div class="subcategory__wrapper">
+        <div>
+          <img src="{{item.imageUrls[0]}}" class="subcategory__img" width="80px" mat-card-image alt="">
+        </div>
+        <div class="subcategory__content-wrapper">
+          <mat-card-header>
+            <mat-card-title class="subcategory__title">
+              <a class="subcategory__link" href="">{{item.name}}</a>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="subcategory__data-wrapper">
+            <p class="subcategory__price">{{item.price | formattingPrice}} руб.</p>
+            <p class="subcategory__available-amount">
+              <span [appGoodsAvailableAmount]="item.availableAmount" class="subcategory__available-amount-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <use xlink:href="assets/img/sprite.svg#availableAmount"></use>
+                </svg>
+              </span>
+              <span *ngIf="item.availableAmount > 0"
+                    class="subcategory__available-amount-text">
+                в наличии: {{item.availableAmount}}</span>
+              <span *ngIf="item.availableAmount === 0" class="subcategory__available-amount-text">нет в наличии</span>
+            </p>
+            <p class="subcategory__rating">
+              <svg *ngFor="let star of [].constructor(item.rating)"
+                width="15" height="14" viewBox="0 0 15 14">
+                <use xlink:href="assets/img/sprite.svg#star"></use>
+              </svg>
+            </p>
+          </mat-card-content>
+        </div>
+      </div>
+      <mat-card-actions class="subcategory__btn-wrapper">
+        <button class="subcategory__btn subcategory__btn--cart" mat-button>в корзину</button>
+        <button class="subcategory__btn subcategory__btn--favorite" mat-button>в избранное</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+  <button (click)="getMoreItems()" class="subcategory__btn-more">Показать больше</button>
+</div>

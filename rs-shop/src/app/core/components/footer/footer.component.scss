@@ -1,12 +1,8 @@
+:host{
+  flex-shrink: 0;
+}
+
 .footer{
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-
-  width: 100%;
-
-  transform: translateX(-50%);
-
   background-color: var(--header-bg-color);
 }
 
@@ -104,7 +100,6 @@
     background-color: var(--hover-orange-opacity);
   }
 }
-
 
 .footer__social-link{
   display: flex;

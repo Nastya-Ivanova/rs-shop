@@ -19,8 +19,11 @@
       </div>
       <div class="carousel__wrapper">
         <a href="" class="carousel__name">{{good.name}}</a>
-        <p class="carousel__rating">рейтинг: {{good.rating}}</p>
-        <p class="carousel__price">цена: {{good.price}} руб.</p>
+        <svg *ngFor="let star of [].constructor(good.rating)"
+             width="15" height="14" viewBox="0 0 15 14">
+          <use xlink:href="assets/img/sprite.svg#star"></use>
+        </svg>
+        <p class="carousel__price">{{good.price | formattingPrice}} руб.</p>
       </div>
     </div>
   </mat-carousel-slide>
