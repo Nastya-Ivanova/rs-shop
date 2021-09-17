@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { GetItemsService } from '../../services/get-items.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IItem } from '../../types/item.type';
+import { GetItemService } from '../../services/get-item.service';
 
 @Component({
   selector: 'app-item',
@@ -11,16 +11,17 @@ import { IItem } from '../../types/item.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent implements OnInit {
-  // categoryId = '';
-  // subCategoryId = '';
-  // items$!: Observable<IItem[]>;
+  item$!: Observable<IItem>;
+  itemId = '';
+  categoryName = '';
+  subcategoryName = '';
 
-  constructor(private getItemsService: GetItemsService, private router: ActivatedRoute) {}
+  constructor(private getItemService: GetItemService, private router: ActivatedRoute) {}
 
   ngOnInit() {
-    // this.categoryId = this.router.snapshot.params.categoryId;
-    // this.subCategoryId = this.router.snapshot.params.subCategoryId;
-    //
-    // this.items$ = this.getItemsService.getItems(this.categoryId, this.subCategoryId, 0, 10);
+    this.itemId = this.router.snapshot.params.itemId;
+    this.item$ = this.getItemService.getItem(this.itemId);
+    this.categoryName = this.router.snapshot.queryParams.categoryName;
+    this.subcategoryName = this.router.snapshot.queryParams.subcategoryName;
   }
 }

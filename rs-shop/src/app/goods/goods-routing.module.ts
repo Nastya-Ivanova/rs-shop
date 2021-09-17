@@ -21,11 +21,11 @@ const routes: Routes = [
         path: ':categoryId/:subCategoryId',
         component: SubcategoryComponent,
       },
+      {
+        path: ':categoryId/:subCategoryId/:itemId',
+        component: ItemComponent,
+      },
     ],
-  },
-  {
-    path: 'goods/item/:id',
-    component: ItemComponent,
   },
 ];
 

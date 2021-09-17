@@ -1,0 +1,159 @@
+::ng-deep .carousel {
+  display: flex !important;
+  justify-content: center;
+
+  width: 500px;
+  height: 500px;
+
+  margin-bottom: 50px;
+  padding: 20px 0;
+
+  border: 1px solid var(--light-gray);
+}
+
+::ng-deep .carousel .carousel-inner {
+  width: 480px;
+}
+
+::ng-deep .carousel .carousel-control-next,
+::ng-deep .carousel .carousel-control-prev {
+  display: none;
+}
+
+::ng-deep .carousel-item img {
+  display: block;
+
+  max-width: 480px;
+  max-height: 480px;
+
+  margin: 0 auto;
+}
+
+::ng-deep .carousel-indicators {
+  bottom: -25px;
+}
+
+::ng-deep .carousel-indicators li {
+  height: 5px;
+
+  background-color: var(--green);
+}
+
+.good__list {
+  margin: 30px 0;
+
+  list-style: none;
+}
+
+.good__breadcrumbs {
+}
+
+.good__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.good__content-wrapper {
+  position: relative;
+
+  margin-left: 30px;
+}
+
+.good__title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.good__text {
+  margin-bottom: 15px;
+}
+
+.good__price {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.good__btn {
+  color: var(--white);
+
+  &--cart {
+    margin-right: 15px;
+    background-color: var(--green);
+  }
+
+  &--favorite {
+    background-color: var(--orange);
+  }
+}
+
+.good__good-icon.visible {
+  display: block;
+  position: absolute;
+  top: -15px;
+  left: -70px;
+
+  width: 50px;
+  height: 50px;
+
+  background-color: var(--orange);
+  background-image: url('/assets/img/hand.svg');
+  background-position: center 5px;
+  background-repeat: no-repeat;
+  background-size: 35px;
+
+  border-radius: 50%;
+}
+
+.good__good-icon {
+  display: none;
+}
+
+.good__available-amount,
+.good__rating {
+  margin: 0;
+}
+
+.good__available-amount {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  margin-bottom: 8px;
+}
+
+.good__available-amount-icon {
+  display: flex;
+  align-items: center;
+
+  margin-right: 5px;
+}
+
+.good__rating {
+  margin-bottom: 20px;
+}
+
+.good__breadcrumbs {
+  margin-bottom: 30px;
+  padding: 0;
+}
+
+.good__breadcrumbs-link,
+.good__breadcrumbs-separator {
+  margin-right: 10px;
+
+  color: var(--light-gray);
+}
+
+.good__breadcrumbs-link {
+  text-decoration: underline;
+  &:hover,
+  &:active {
+    color: var(--gray);
+  }
+}
+
+.good__breadcrumbs-text {
+  color: var(--light-gray);
+}

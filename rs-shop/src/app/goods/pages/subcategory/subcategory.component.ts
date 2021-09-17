@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IItem } from '../../types/item.type';
 import { GetItemsService } from '../../services/get-items.service';
 import { TSortKey, TSortOrder } from '../../types/sorting-by.types';
@@ -25,13 +25,17 @@ export class SubcategoryComponent implements OnInit {
   arrowPrice = false;
   toggleArrowRotate = false;
 
-  constructor(private getItemsService: GetItemsService, private router: ActivatedRoute) {}
+  constructor(
+    private getItemsService: GetItemsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
-    this.categoryId = this.router.snapshot.params.categoryId;
-    this.subCategoryId = this.router.snapshot.params.subCategoryId;
+    this.categoryId = this.activatedRoute.snapshot.params.categoryId;
+    this.subCategoryId = this.activatedRoute.snapshot.params.subCategoryId;
 
-    this.router.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       this.categoryName = params.categoryName;
       this.subcategoryName = params.subcategoryName;
     });

@@ -22,6 +22,7 @@ import { SortByPipe } from './pipes/sort-by.pipe';
     ItemComponent,
     PopularGoodsComponent,
     SubcategoryComponent,
+    SliderComponent,
     GoodsAvailableAmountDirective,
     FormattingPricePipe,
     SortByPipe,
