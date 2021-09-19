@@ -1,0 +1,24 @@
+<div *ngIf="userInfo$ | async" class="container favorite">
+  <h2 class="favorite__title">Избранные товары</h2>
+  <ul class="favorite__list">
+    <li *ngFor="let item$ of items" class="favorite__item">
+      <ng-container *ngIf="item$ | async as item">
+        <img src="{{item.imageUrls[0]}}" class="favorite__img" alt="">
+        <div class="favorite__content-wrapper">
+          <p class="favorite__name">{{item.name}}</p>
+          <p class="favorite__price">{{item.price | formattingPrice}} руб.</p>
+          <p class="favorite__rating">
+            <svg *ngFor="let star of [].constructor(item.rating)"
+                 width="15" height="14" viewBox="0 0 15 14">
+              <use xlink:href="assets/img/sprite.svg#star"></use>
+            </svg>
+          </p>
+          <div class="favorite__btn-wrapper">
+            <button (click)="addToCart(item.id)" class="favorite__btn favorite__btn--cart" mat-button>в корзину</button>
+            <button (click)="deleteFromFavorite(item.id)" class="favorite__btn favorite__btn--favorite" mat-button>удалить из избранного</button>
+          </div>
+        </div>
+      </ng-container>
+    </li>
+  </ul>
+</div>

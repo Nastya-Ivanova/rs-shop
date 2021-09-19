@@ -9,11 +9,21 @@ import { RegisterService } from './services/register.service';
 import { LocalStorageAuthService } from './services/local-storage-auth.service';
 import { UserInfoService } from './services/user-info.service';
 import { LoginService } from './services/login.service';
+import { UsersRoutingModule } from './users-routing.module';
+import { FavoritesComponent } from './pages/favorites/favorites.component';
+import { GoodsModule } from '../goods/goods.module';
+import { DeleteFromFavoriteService } from './services/delete-from-favorite.service';
 
 @NgModule({
-  declarations: [ModalAuthComponent, AccountComponent, ModalRegisterComponent],
-  imports: [CommonModule, MaterialModule, FormsModule],
+  declarations: [ModalAuthComponent, AccountComponent, ModalRegisterComponent, FavoritesComponent],
+  imports: [UsersRoutingModule, CommonModule, MaterialModule, FormsModule, GoodsModule],
   exports: [AccountComponent],
-  providers: [RegisterService, LocalStorageAuthService, UserInfoService, LoginService],
+  providers: [
+    RegisterService,
+    LocalStorageAuthService,
+    UserInfoService,
+    LoginService,
+    DeleteFromFavoriteService,
+  ],
 })
 export class UsersModule {}
