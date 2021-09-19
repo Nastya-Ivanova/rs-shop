@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
@@ -10,7 +10,7 @@ import { UserInfoService } from '../../services/user-info.service';
   selector: 'app-modal-auth',
   templateUrl: './modal-auth.component.html',
   styleUrls: ['./modal-auth.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalAuthComponent {
   isUnauthorized = false;
@@ -31,7 +31,7 @@ export class ModalAuthComponent {
     token$.subscribe(
       (response) => {
         this.localStorageAuthService.setToken(response.token);
-        this.userInfoService.getUserInfo(response.token);
+        this.userInfoService.getUserInfo();
         this.dialogRef.close();
       },
       () => {

@@ -1,3 +1,3 @@
 export interface IAuthToken {
-  token: 'string';
+  token: string;
 }

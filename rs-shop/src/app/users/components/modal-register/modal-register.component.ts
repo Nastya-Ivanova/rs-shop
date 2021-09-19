@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalAuthComponent } from '../modal-auth/modal-auth.component';
 import { RegisterService } from '../../services/register.service';
 import { LocalStorageAuthService } from '../../services/local-storage-auth.service';
+import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
   selector: 'app-modal-register',
@@ -17,6 +18,7 @@ export class ModalRegisterComponent {
     private dialogRef: MatDialogRef<ModalRegisterComponent>,
     private authService: RegisterService,
     private localStorageAuthService: LocalStorageAuthService,
+    private userInfoService: UserInfoService,
   ) {}
 
   openModalAuth() {
@@ -32,7 +34,11 @@ export class ModalRegisterComponent {
         password: registerForm.value.password,
       });
 
-      token$.subscribe((response) => this.localStorageAuthService.setToken(response.token));
+      token$.subscribe((response) => {
+        this.localStorageAuthService.setToken(response.token);
+        this.userInfoService.getUserInfo();
+      });
+
       this.dialogRef.close();
     }
   }

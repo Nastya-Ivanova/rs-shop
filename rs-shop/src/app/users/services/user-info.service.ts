@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { baseUrl } from '../../constants/base-url';
 import { IUserInfo } from '../types/user-info';
+import { LocalStorageAuthService } from './local-storage-auth.service';
 
 @Injectable()
 export class UserInfoService {
-  constructor(private http: HttpClient) {}
-
-  private userInfo = new BehaviorSubject<IUserInfo | null>(null);
-
+  userInfo = new Subject<IUserInfo>();
   userInfo$ = this.userInfo.asObservable();
 
-  getUserInfo(token: string) {
+  constructor(private http: HttpClient, private localStorageAuthService: LocalStorageAuthService) {}
+
+  getUserInfo() {
+    const token = this.localStorageAuthService.getToken();
+
     const requestOptions = {
       headers: new HttpHeaders(`Authorization: Bearer ${token}`),
     };

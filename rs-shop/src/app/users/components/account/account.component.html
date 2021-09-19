@@ -11,7 +11,7 @@
   </div>
   <ng-template #signIn>
     <img class="account__img" src="/assets/img/account-preview.svg" alt="user photo" width="48" height="48">
-    <button (click)="openModalAuth()" class="account__sign-in-btn">Войти</button>
+    <button (click)="openModalAuth()" class="account__login-btn">Войти</button>
   </ng-template>
   <a href="" class="account__link" mat-menu-item>
     <svg width="17" height="16" viewBox="0 0 17 16">
@@ -31,4 +31,5 @@
     </svg>
     <span>Лист ожидания</span>
   </a>
+  <button *ngIf="userInfo$ | async" (click)="logOut()" class="account__logout-btn account__login-btn">Выход</button>
 </mat-menu>
