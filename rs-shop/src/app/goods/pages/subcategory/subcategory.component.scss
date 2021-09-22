@@ -49,6 +49,8 @@
 .subcategory__content-wrapper {
   display: flex;
   flex-direction: column;
+  width: 111px;
+  overflow: hidden;
 }
 
 ::ng-deep .mat-card-image.subcategory__img {
@@ -164,6 +166,7 @@
 }
 
 .subcategory__link {
+  font-size: 13px;
   color: var(--blue);
 }
 
@@ -213,22 +216,47 @@
 
 .subcategory__card ::ng-deep .mat-card-actions.subcategory__btn-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 
   margin: auto 0 0;
 }
 
 .subcategory__btn {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
   color: var(--white);
 
   &--cart {
+    width: 90px;
     background-color: var(--green);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-green);
+    }
   }
 
   &--favorite {
+    width: 105px;
     margin-right: 0;
     background-color: var(--orange);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-orange);
+    }
   }
+
+  &--add-cart{
+    background-color: var(--blue);
+  }
+}
+
+.subcategory__btn--cart.add,
+.subcategory__btn--favorite.add
+{
+    background-color: var(--blue);
 }
 
 .subcategory__btn-wrapper .subcategory__btn--favorite {
@@ -246,4 +274,21 @@
   border: none;
   background-color: var(--blue);
   cursor: pointer;
+}
+
+.subcategory__img-unknown{
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: var(--light-gray);
+}
+
+.subcategory__img-unknown.visible{
+  display: flex;
 }

@@ -13,19 +13,19 @@
     <img class="account__img" src="/assets/img/account-preview.svg" alt="user photo" width="48" height="48">
     <button (click)="openModalAuth()" class="account__login-btn">Войти</button>
   </ng-template>
-  <a href="" class="account__link" mat-menu-item>
+  <a routerLink="users/cart" class="account__link" mat-menu-item>
     <svg width="17" height="16" viewBox="0 0 17 16">
       <use xlink:href="assets/img/sprite.svg#cart"></use>
     </svg>
     <span>Корзина</span>
   </a>
-  <a href="" class="account__link" mat-menu-item>
+  <a routerLink="users/favorites" class="account__link" mat-menu-item>
     <svg width="17" height="17" viewBox="0 0 512 512">
       <use xlink:href="assets/img/sprite.svg#hearth"></use>
     </svg>
     <span>Избранные товары</span>
   </a>
-  <a href="" class="account__link" mat-menu-item>
+  <a routerLink="users/orders" class="account__link" mat-menu-item>
     <svg width="18" height="18" viewBox="0 0 512 512">
       <use xlink:href="assets/img/sprite.svg#waitingList"></use>
     </svg>

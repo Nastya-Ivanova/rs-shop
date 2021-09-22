@@ -1,10 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { IItem } from '../../types/item.type';
 import { GetItemsService } from '../../services/get-items.service';
 import { TSortKey, TSortOrder } from '../../types/sorting-by.types';
+import { AddToCartService } from '../../../core/services/add-to-cart.service';
+import { AddToFavoriteService } from '../../../core/services/add-to-favorite.service';
+import { getCategories } from '../../../redux/selectors/get-categories.selector';
+import { ICategory } from '../../../core/types/category.type';
+import { IStore } from '../../../redux/state.model';
 
 @Component({
   selector: 'app-category',
@@ -12,9 +18,11 @@ import { TSortKey, TSortOrder } from '../../types/sorting-by.types';
   styleUrls: ['./subcategory.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SubcategoryComponent implements OnInit {
-  categoryName = '';
-  subcategoryName = '';
+export class SubcategoryComponent implements OnInit, OnDestroy {
+  categories$!: Observable<ICategory[]>;
+  categoryName: string | undefined = '';
+  subcategoryName: string | undefined = '';
+  catNum = 0;
   categoryId = '';
   subCategoryId = '';
   count = 0;
@@ -24,20 +32,34 @@ export class SubcategoryComponent implements OnInit {
   arrowRating = false;
   arrowPrice = false;
   toggleArrowRotate = false;
+  subscription = new Subscription();
+  isAddToCart = false;
 
   constructor(
     private getItemsService: GetItemsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private addToCartService: AddToCartService,
+    private addToFavoriteService: AddToFavoriteService,
+    private store: Store<IStore>,
   ) {}
 
   ngOnInit() {
+    this.catNum = this.activatedRoute.snapshot.params.catNum;
     this.categoryId = this.activatedRoute.snapshot.params.categoryId;
     this.subCategoryId = this.activatedRoute.snapshot.params.subCategoryId;
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.categoryName = params.categoryName;
-      this.subcategoryName = params.subcategoryName;
+    this.categories$ = this.store.select(getCategories);
+
+    this.subscription = this.categories$.subscribe((categories) => {
+      const category = categories.find((categ) => categ.id === this.categoryId);
+      this.categoryName = category?.name;
+
+      if (category) {
+        const subcategory = category.subCategories.find(
+          (subCateg) => subCateg.id === this.subCategoryId,
+        );
+        this.subcategoryName = subcategory?.name;
+      }
     });
 
     this.items$ = this.getItemsService.getItems(
@@ -47,6 +69,10 @@ export class SubcategoryComponent implements OnInit {
       this.count + 10,
     );
     this.count += 10;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   setSortKey(key: TSortKey) {
@@ -84,5 +110,19 @@ export class SubcategoryComponent implements OnInit {
     );
 
     this.count += 10;
+  }
+
+  addToCart(id: string, btn: HTMLInputElement) {
+    this.addToCartService.addToCart(id);
+    btn.value = 'добавлено';
+    btn.classList.add('add');
+    btn.setAttribute('disabled', 'disabled');
+  }
+
+  addToFavorite(id: string, btn: HTMLInputElement) {
+    this.addToFavoriteService.addToFavorite(id);
+    btn.value = 'добавлено';
+    btn.classList.add('add');
+    btn.setAttribute('disabled', 'disabled');
   }
 }

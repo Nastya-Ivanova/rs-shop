@@ -5,10 +5,10 @@ import { baseUrl } from '../../constants/base-url';
 import { IAuthToken } from '../types/auth-token';
 
 interface IRegisterUser {
-  firstName?: 'string';
-  lastName?: 'string';
-  login: 'string';
-  password: 'string';
+  firstName?: string;
+  lastName?: string;
+  login: string;
+  password: string;
 }
 
 @Injectable()

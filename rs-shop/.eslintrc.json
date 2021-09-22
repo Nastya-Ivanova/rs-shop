@@ -43,7 +43,8 @@
           "exceptAfterSingleLine": true
         }],
         "no-nested-ternary": "off",
-        "class-methods-use-this" : "off"
+        "class-methods-use-this" : "off",
+        "no-param-reassign": 0
       }
     },
     {

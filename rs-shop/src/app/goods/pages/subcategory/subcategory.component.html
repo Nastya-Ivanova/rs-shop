@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="subcategory__header">{{subcategoryName}}</h2>
   <div class="subcategory__breadcrumbs">
-    <a [routerLink]="['/goods']" class="subcategory__breadcrumbs-link">{{categoryName}}</a>
+    <a routerLink="/goods/{{catNum}}" class="subcategory__breadcrumbs-link">{{categoryName}}</a>
     <span class="subcategory__breadcrumbs-separator">></span>
     <span class="subcategory__breadcrumbs-text">{{subcategoryName}}</span>
   </div>
@@ -28,11 +28,14 @@
       <div class="subcategory__wrapper">
         <div>
           <img src="{{item.imageUrls[0]}}" class="subcategory__img" width="80px" mat-card-image alt="">
+          <div [class.visible]="item.imageUrls[0] === undefined" class="subcategory__img-unknown">фото нет</div>
         </div>
         <div class="subcategory__content-wrapper">
           <mat-card-header>
             <mat-card-title class="subcategory__title">
-              <a routerLink="{{item.id}}" [queryParams]="{categoryName: categoryName, subcategoryName: subcategoryName}" class="subcategory__link">{{item.name}}</a>
+              <a routerLink="/{{item.id}}"
+                 class="subcategory__link"
+              >{{item.name}}</a>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="subcategory__data-wrapper">
@@ -58,11 +61,13 @@
         </div>
       </div>
       <mat-card-actions class="subcategory__btn-wrapper">
-        <button class="subcategory__btn subcategory__btn--cart" mat-button>в корзину</button>
-        <button class="subcategory__btn subcategory__btn--favorite" mat-button>в избранное</button>
+        <input #btnCart type="button"
+               (click)="addToCart(item.id, btnCart)"
+               class="subcategory__btn subcategory__btn--cart" value="в корзину">
+        <input #btnFavorite type="button"
+               (click)="addToFavorite(item.id, btnFavorite)" class="subcategory__btn subcategory__btn--favorite" value="в избранное">
       </mat-card-actions>
     </mat-card>
-
   </div>
   <button (click)="getMoreItems()" class="subcategory__btn-more">Показать больше</button>
 </div>

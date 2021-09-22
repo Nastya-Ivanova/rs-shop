@@ -411,9 +411,16 @@
   color: var(--black);
 }
 
-.header__search-link{
+.header__search-link:not(href){
+  text-decoration:underline ;
   color: var(--blue);
   font-size: 12px;
+  cursor: pointer;
+
+  &:hover,
+  &:active{
+    color: var(--hover-blue);
+  }
 }
 
 .header__card-link span {

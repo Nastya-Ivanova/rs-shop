@@ -40,6 +40,11 @@
     fill: var(--white);
     color: #39a9e0;
   }
+
+  &:hover,
+  &:active {
+    color: var(--orange);
+  }
 }
 
 .footer__text{

@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { IItem } from '../../types/item.type';
@@ -15,9 +15,10 @@ import { ICategory } from '../../../core/types/category.type';
   styleUrls: ['./popular-goods.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PopularGoodsComponent implements OnInit {
+export class PopularGoodsComponent implements OnInit, OnDestroy {
   categories$!: Observable<ICategory[]>;
   goods!: Observable<IItem[]>[];
+  subscription = new Subscription();
 
   constructor(
     private getCategoriesService: GetCategoriesService,
@@ -28,7 +29,7 @@ export class PopularGoodsComponent implements OnInit {
   ngOnInit() {
     this.categories$ = this.store.select(getCategories);
 
-    this.categories$.subscribe((categories) => {
+    this.subscription = this.categories$.subscribe((categories) => {
       this.goods = categories
         .map((category) =>
           this.getItemsService
@@ -37,5 +38,9 @@ export class PopularGoodsComponent implements OnInit {
         )
         .slice(0, 3);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

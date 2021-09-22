@@ -9,9 +9,7 @@
           <use [attr.xlink:href]="'assets/img/sprite.svg#' + category.id"></use>
         </svg>
       </span>
-      <a class="goods__category-link" href="">
-        <span>{{category.name}}</span>
-      </a>
+      <div class="goods__category-link">{{category.name}}</div>
         <div
           #subcategory
           class="goods__subcategory-wrapper {{category.id}}">
@@ -19,7 +17,6 @@
           <ul class="goods__subcategory-list">
             <li class="goods__subcategory-item" *ngFor="let subcategory of category.subCategories">
               <a routerLink="{{category.id}}/{{subcategory.id}}"
-                 [queryParams]="{categoryName: category.name, subcategoryName: subcategory.name}"
                  class="goods__subcategory-link"
              >{{subcategory.name}}</a>
             </li>
@@ -28,4 +25,3 @@
     </li>
   </ul>
 </div>
-

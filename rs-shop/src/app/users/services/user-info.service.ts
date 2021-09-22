@@ -19,8 +19,8 @@ export class UserInfoService {
       headers: new HttpHeaders(`Authorization: Bearer ${token}`),
     };
 
-    this.http
-      .get<IUserInfo>(`${baseUrl}users/userInfo`, requestOptions)
-      .subscribe((userInfo) => this.userInfo.next(userInfo));
+    this.http.get<IUserInfo>(`${baseUrl}users/userInfo`, requestOptions).subscribe((userInfo) => {
+      this.userInfo.next(userInfo);
+    });
   }
 }

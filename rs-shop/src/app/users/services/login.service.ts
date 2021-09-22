@@ -6,8 +6,8 @@ import { Observable, throwError } from 'rxjs';
 import { IAuthToken } from '../types/auth-token';
 
 interface ILogin {
-  login: 'string';
-  password: 'string';
+  login: string;
+  password: string;
 }
 
 @Injectable()

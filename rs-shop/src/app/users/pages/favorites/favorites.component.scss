@@ -17,6 +17,8 @@
   justify-content: flex-start;
   align-items: flex-start;
 
+  width: 500px;
+
   margin: 15px;
   padding: 15px;
 
@@ -59,14 +61,32 @@
   color: var(--white);
 
   &--cart {
+    width: 90px;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
     margin-right: 10px;
     background-color: var(--green);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-green);
+    }
   }
 
   &--favorite {
     margin-right: 0;
     background-color: var(--orange);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-orange);
+    }
   }
+}
+
+.favorite__btn.add{
+  background-color: var(--blue);
 }
 
 .favorite__content-wrapper{

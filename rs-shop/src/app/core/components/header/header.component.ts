@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ModalLocationComponent } from '../modal-location/modal-location.component';
 import { GetLocationService } from '../../services/get-location.service';
 import { IStore } from '../../../redux/state.model';
@@ -19,22 +20,24 @@ import { ISearchResult } from '../../../goods/types/search-result';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  @ViewChild('searchList') searchList!: ElementRef;
   userCity$!: Observable<string>;
   categories$!: Observable<ICategory[]>;
   search$ = new BehaviorSubject('');
   searchResult$!: Observable<ISearchResult[]> | null;
-  visibleSearchResult = false;
+  subscriptionLocation = new Subscription();
 
   constructor(
     private dialog: MatDialog,
     private getLocationService: GetLocationService,
     public store: Store<IStore>,
     private searchService: SearchService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.getLocationService.getLocation$().subscribe((initialCity) => {
+    this.subscriptionLocation = this.getLocationService.getLocation$().subscribe((initialCity) => {
       this.store.dispatch(
         setUserLocationAction({
           city: initialCity,
@@ -51,18 +54,9 @@ export class HeaderComponent implements OnInit {
       .pipe(
         filter((searchStr) => searchStr.length > 2),
         debounceTime(1000),
-        distinctUntilChanged(),
       )
       .subscribe((searchStr) => {
-        this.searchResult$ = this.searchService.getSearchResult$(searchStr).pipe(
-          tap((searchResult) => {
-            if (searchResult.length === 0) {
-              this.visibleSearchResult = false;
-            } else {
-              this.visibleSearchResult = true;
-            }
-          }),
-        );
+        this.searchResult$ = this.searchService.getSearchResult$(searchStr);
       });
   }
 
@@ -73,5 +67,15 @@ export class HeaderComponent implements OnInit {
   clearSearchInput() {
     this.searchResult$ = null;
     this.search$.next('');
+  }
+
+  search(id: string) {
+    this.router.navigateByUrl(`/${id}`);
+    this.clearSearchInput();
+  }
+
+  ngOnDestroy() {
+    this.subscriptionLocation.unsubscribe();
+    this.search$.unsubscribe();
   }
 }

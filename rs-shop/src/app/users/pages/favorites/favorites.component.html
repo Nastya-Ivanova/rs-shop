@@ -14,8 +14,12 @@
             </svg>
           </p>
           <div class="favorite__btn-wrapper">
-            <button (click)="addToCart(item.id)" class="favorite__btn favorite__btn--cart" mat-button>в корзину</button>
-            <button (click)="deleteFromFavorite(item.id)" class="favorite__btn favorite__btn--favorite" mat-button>удалить из избранного</button>
+            <input #btnCart type="button"
+                   (click)="addToCart(item.id, btnCart)"
+                   class="favorite__btn favorite__btn--cart" value="в корзину">
+            <button (click)="deleteFromFavorite(item.id)"
+                    class="favorite__btn favorite__btn--favorite" mat-button
+            >удалить из избранного</button>
           </div>
         </div>
       </ng-container>

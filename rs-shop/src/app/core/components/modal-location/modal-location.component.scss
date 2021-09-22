@@ -50,7 +50,7 @@
 
   border-radius: 5px;
   border: none;
-  background-color: var(--blue);
+  background-color: var(--green);
   cursor: pointer;
 
   &:last-of-type{
@@ -59,6 +59,6 @@
 
   &:hover,
   &:active{
-    background-color: var(--hover-blue);
+    background-color: var(--hover-green);
   }
 }

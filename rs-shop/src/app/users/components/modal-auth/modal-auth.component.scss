@@ -68,6 +68,11 @@
   text-decoration: underline;
 
   cursor: pointer;
+
+  &:hover,
+  &:focus{
+    color: var(--hover-green);
+  }
 }
 
 .modal-auth__error-message{

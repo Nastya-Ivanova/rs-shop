@@ -76,16 +76,37 @@
 }
 
 .good__btn {
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
   color: var(--white);
 
   &--cart {
+    width: 90px;
     margin-right: 15px;
     background-color: var(--green);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-green);
+    }
   }
 
   &--favorite {
+    width: 105px;
     background-color: var(--orange);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-orange);
+    }
   }
+}
+
+.good__btn--cart.add,
+.good__btn--favorite.add
+{
+  background-color: var(--blue);
 }
 
 .good__good-icon.visible {

@@ -13,10 +13,28 @@ import { UsersRoutingModule } from './users-routing.module';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { GoodsModule } from '../goods/goods.module';
 import { DeleteFromFavoriteService } from './services/delete-from-favorite.service';
+import { SubmitOrderService } from './services/submit-order.service';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { SharedModule } from '../shared/shared.module';
+import { DeleteOrderService } from './services/delete-order.service';
+import { EditOrderService } from './services/edit-order.service';
 
 @NgModule({
-  declarations: [ModalAuthComponent, AccountComponent, ModalRegisterComponent, FavoritesComponent],
-  imports: [UsersRoutingModule, CommonModule, MaterialModule, FormsModule, GoodsModule],
+  declarations: [
+    ModalAuthComponent,
+    AccountComponent,
+    ModalRegisterComponent,
+    FavoritesComponent,
+    OrdersComponent,
+  ],
+  imports: [
+    UsersRoutingModule,
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    GoodsModule,
+    SharedModule,
+  ],
   exports: [AccountComponent],
   providers: [
     RegisterService,
@@ -24,6 +42,9 @@ import { DeleteFromFavoriteService } from './services/delete-from-favorite.servi
     UserInfoService,
     LoginService,
     DeleteFromFavoriteService,
+    SubmitOrderService,
+    DeleteOrderService,
+    EditOrderService,
   ],
 })
 export class UsersModule {}

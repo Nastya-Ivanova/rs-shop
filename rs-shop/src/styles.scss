@@ -19,12 +19,13 @@ $rs-shop-theme: mat.define-light-theme(
   --black: #1a1a1a;
   --gray: #909399;
   --blue:#07c;
+  --hover-blue: #01518b;
   --light-gray: #b0b3b8;
   --green: #00717D;
   --orange: #F05128;
   --hover-orange: #cb3c15;
   --hover-orange-opacity: rgba(240, 81, 40, 0.2);
-  --hover-green: rgba(1, 64, 69, 0.2);
+  --hover-green: rgba(1, 64, 69);
   --hover-green-opacity: rgba(0, 113, 125, 0.2);
   --header-bg-color: #f7f8fa;
 }

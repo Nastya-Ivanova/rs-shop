@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { ModalRegisterComponent } from '../modal-register/modal-register.component';
 import { LoginService } from '../../services/login.service';
 import { LocalStorageAuthService } from '../../services/local-storage-auth.service';
@@ -13,7 +14,8 @@ import { UserInfoService } from '../../services/user-info.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalAuthComponent {
-  isUnauthorized = false;
+  isUnauthorized = new BehaviorSubject(false);
+  isUnauthorized$ = this.isUnauthorized.asObservable();
 
   constructor(
     private dialog: MatDialog,
@@ -35,7 +37,7 @@ export class ModalAuthComponent {
         this.dialogRef.close();
       },
       () => {
-        this.isUnauthorized = true;
+        this.isUnauthorized.next(true);
       },
     );
   }

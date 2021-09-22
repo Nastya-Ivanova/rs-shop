@@ -2,12 +2,15 @@
   <ul class="good__list">
     <li *ngIf="item$ | async as item" class="good__item">
       <div class="good__breadcrumbs">
-        <a [routerLink]="['/goods']" class="good__breadcrumbs-link">{{categoryName}}</a>
+        <a routerLink="/goods/{{catNum}}" class="good__breadcrumbs-link">{{categoryName}}</a>
         <span class="good__breadcrumbs-separator">></span>
-        <a routerLink="/goods/{{item.category}}/{{item.subCategory}}"
-           [queryParams]="{categoryName: categoryName, subcategoryName: subcategoryName}"
+        <a routerLink="/goods/{{catNum}}/{{item.category}}/{{item.subCategory}}"
+
            class="good__breadcrumbs-link"
         >{{subcategoryName}}</a>
+
+<!--        [queryParams]="{categoryName: categoryName, subcategoryName: subcategoryName}"-->
+
         <span class="good__breadcrumbs-separator">></span>
         <span class="good__breadcrumbs-text">{{item.name}}</span>
       </div>
@@ -39,9 +42,13 @@
           </svg>
         </p>
         <p class="good__price">{{item.price | formattingPrice}} руб.</p>
-        <button class="good__btn good__btn--cart" mat-button>в корзину</button>
-        <button class="good__btn good__btn--favorite" mat-button>в избранное</button>
-        <p class="good__good-icon" [class.visible]="item.rating>4"></p>
+        <input #btnCart type="button"
+               (click)="addToCart(item.id, btnCart)"
+               class="good__btn good__btn--cart" value="в корзину">
+        <input #btnFavorite type="button"
+               (click)="addToFavorite(item.id, btnFavorite)"
+               class="good__btn good__btn--favorite" value="в избранное">
+        <p class="good__good-icon" [class.visible]="item.rating > 4"></p>
       </div>
     </div>
     </li>

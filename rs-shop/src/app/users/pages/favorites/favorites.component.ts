@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { UserInfoService } from '../../services/user-info.service';
 import { IUserInfo } from '../../types/user-info';
 import { IItem } from '../../../goods/types/item.type';
@@ -13,9 +13,10 @@ import { DeleteFromFavoriteService } from '../../services/delete-from-favorite.s
   styleUrls: ['./favorites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent implements OnInit, OnDestroy {
   userInfo$!: Observable<IUserInfo> | null;
   items!: Observable<IItem>[];
+  subscription = new Subscription();
 
   constructor(
     private userInfoService: UserInfoService,
@@ -28,19 +29,26 @@ export class FavoritesComponent implements OnInit {
     this.userInfoService.getUserInfo();
     this.userInfo$ = this.userInfoService.userInfo$;
 
-    this.userInfo$.subscribe((info) => {
+    this.subscription = this.userInfo$.subscribe((info) => {
       if (info) {
         this.items = info.favorites.map((favorite) => this.getItemService.getItem(favorite));
       }
     });
   }
 
-  addToCart(id: string) {
-    this.addToCartService.addToCart(id);
-  }
-
   deleteFromFavorite(id: string) {
     this.deleteFromFavoriteService.deleteFromFavorite(id);
     this.userInfoService.getUserInfo();
+    this.userInfo$ = this.userInfoService.userInfo$;
+  }
+
+  addToCart(id: string, btn: HTMLInputElement) {
+    this.addToCartService.addToCart(id);
+    btn.value = 'добавлено';
+    btn.classList.add('add');
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
