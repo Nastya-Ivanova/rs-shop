@@ -1,0 +1,65 @@
+<div class="container orders">
+  <h2 class="orders__header">Лист ожидания</h2>
+  <mat-accordion *ngIf="userInfo$ | async as userInfo">
+    <mat-expansion-panel  *ngFor="let order of userInfo.orders; let i = index"
+                          (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p class="orders__order">Заказ № {{order.id}}</p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="orders__form">
+        <label for="name" class="orders__label">ФИО:</label>
+        <input #editField #name [value]="order.details.name" id="name" type="text" class="orders__form-field" disabled>
+        <label for="address" class="orders__label">Адрес:</label>
+        <input #editField #address [value]="order.details.address" id="address" type="text" class="orders__form-field" disabled>
+        <label for="phone" class="orders__label">Телефон:</label>
+        <input #editField #phone [value]="order.details.phone" id="phone" type="text" class="orders__form-field" disabled>
+        <label for="date" class="orders__label">Дата доставки:</label>
+        <input #editField #timeToDeliver [value]="order.details.timeToDeliver" id="date" type="text" class="orders__form-field" disabled>
+        <label for="comment" class="orders__label">Комментарий:</label>
+        <input #editField #comment [value]="order.details.comment" id="comment" type="text" class="orders__form-field" disabled>
+        <div class="orders__btn-edit-wrapper">
+          <button (click)="editOrder()" class="orders__btn orders__btn--edit">Редактировать заказ</button>
+          <button (click)="resetEdit()" class="orders__btn orders__btn--edit">Отменить</button>
+          <button
+            (click)="submitEditOrder(order.id, name.value, address.value, phone.value, timeToDeliver.value, comment.value)"
+            class="orders__btn orders__btn--save"
+          >Сохранить</button>
+        </div>
+      </div>
+          <table>
+            <tr class="orders__table-header-row">
+              <th class="orders__table-first-column">Товар</th>
+              <th>Количество</th>
+              <th>Цена, руб.</th>
+              <th>Стоимость, руб.</th>
+            </tr>
+            <ng-container *ngFor="let item of orders[i]; let y = index">
+              <ng-container *ngIf="item | async as good">
+            <tr>
+              <td class="orders__content-wrapper">
+                <img src="{{good.imageUrls[0]}}" class="orders__img" alt="">
+                <p class="orders__name">{{good.name}}</p>
+              </td>
+              <td>
+                <input #amount class="orders__field" [value]="goodsAmount[y]">
+              </td>
+              <td>
+                <input #goodPrice class="orders__field" [value]="good.price">
+              </td>
+              <td>
+                <input class="orders__field" [value]="+goodPrice.value * +amount.value">
+              </td>
+            </tr>
+              </ng-container>
+            </ng-container>
+          </table>
+
+      <button (click)="deleteOrder(order.id)" class="orders__btn orders__btn--delete">Удалить заказ</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
