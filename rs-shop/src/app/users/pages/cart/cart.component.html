@@ -1,0 +1,104 @@
+<div class="container cart">
+  <h2 class="cart__header">Оформление заказа</h2>
+  <p class="cart__subheader">Список товаров:</p>
+  <form #orderForm=ngForm class="cart__order-form">
+    <table *ngIf="userInfo$ | async" class="cart__order-table">
+      <tr>
+        <th *ngFor="let header of headerColumns">{{header}}</th>
+      </tr>
+      <tr *ngFor="let item$ of items; let i = index">
+        <ng-container *ngIf="item$ | async as item">
+          <td class="cart__order-column-name">
+            <div class="cart__order-name-wrapper">
+              <img class="cart__order-table-img" src="{{item.imageUrls[0]}}" alt="">
+              <a routerLink="/{{item.id}}" class="cart__order-table-text">{{item.name}}</a>
+              <input #itemId value="{{item.id}}" style="display:none">
+            </div>
+          </td>
+          <td>
+            <button (click)="decrement(i)" class="cart__order-table-btn">-</button>
+            <input #goodCount type="text" value="1" class="cart__order-table-field">
+            <button (click)="increment(i)" class="cart__order-table-btn">+</button>
+          </td>
+          <td>
+            <ul class="cart__order-table-delivery">
+              <li>Курьером: сегодня</li>
+              <li>Самовывоз: сегодня</li>
+            </ul>
+          </td>
+          <td>
+            <input [value]="priceArr[i]" class="cart__order-table-price">
+            <span class="cart__order-table-currency">руб.</span>
+            <svg (click)="deleteCart(item.id)" class="cart__order-table-icon-delete" height="24" viewBox="0 0 512 512" width="24">
+              <use xlink:href="assets/img/sprite.svg#delete"></use>
+            </svg>
+          </td>
+        </ng-container>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <p class="cart__order-table-total">ИТОГО:</p>
+        </td>
+        <td>
+          <input value="{{totalPrice}}" class="cart__order-table-price">
+          <span class="cart__order-table-currency">руб.</span>
+        </td>
+      </tr>
+    </table>
+
+    <label class="cart__order-form-label" for="name">ФИО:</label>
+    <input name="name" ngModel #name="ngModel" id="name" class="cart__order-form-field" type="text" minlength="3" maxlength="50" required>
+    <p *ngIf="name.errors?.required"
+       class="cart__order-form-error-message"
+    >*Поле обязательно для заполнения</p>
+    <p *ngIf="name.errors?.minlength"
+       class="cart__order-form-error-message"
+    >*Длина поля не менее 3-х символов</p>
+    <p *ngIf="name.value !== null && name.value.length === 50"
+       class="cart__order-form-error-message"
+    >*Длина поля не более 50-ти символов</p>
+
+    <label class="cart__order-form-label" for="address">Адрес:</label>
+    <input name="address" ngModel #address="ngModel" id="address" class="cart__order-form-field" type="text" minlength="3" maxlength="250" required>
+    <p *ngIf="address.errors?.required"
+       class="cart__order-form-error-message"
+    >*Поле обязательно для заполнения</p>
+    <p *ngIf="address.errors?.minlength"
+       class="cart__order-form-error-message"
+    >*Длина поля не менее 3-х символов</p>
+    <p *ngIf="address.value !== null && address.value.length === 250"
+       class="cart__order-form-error-message"
+    >*Длина поля не более 250-ти символов</p>
+
+    <label class="cart__order-form-label" for="tel">Телефон:</label>
+    <input name="tel" ngModel #tel="ngModel" id="tel"
+           pattern="^[+]{1}[0-9]*"
+           class="cart__order-form-field cart__order-form-field--tel" type="text"
+           placeholder="+7921333333" required>
+    <p *ngIf="tel.errors?.required"
+       class="cart__order-form-error-message"
+    >*Поле обязательно для заполнения.</p>
+    <p *ngIf="tel.errors?.pattern"
+       class="cart__order-form-error-message"
+    >*Некорректно заполнено, шаблон +XXXXXXXXX</p>
+
+    <mat-label class="cart__order-form-label">Дата доставки:</mat-label>
+    <div class="cart__order-form-wrapper">
+      <input name="date" ngModel #date="ngModel" matInput [matDatepicker]="picker"
+             class="cart__order-form-field cart__order-form-field--time" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+    <p *ngIf="date.value === null || date.value.length === 0"
+       class="cart__order-form-error-message"
+    >*Поле обязательно для заполнения</p>
+
+    <label class="cart__order-form-label" for="comment">Комментарий:</label>
+    <textarea name="comment" ngModel #comment="ngModel" id="comment" class="cart__order-form-field" maxlength="250" cols="30" rows="6"></textarea>
+
+    <button (click)="submitOrder(orderForm)" class="cart__order-form-btn">Оформить заказ</button>
+  </form>
+</div>
+
+
+

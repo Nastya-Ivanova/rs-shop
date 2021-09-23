@@ -18,6 +18,8 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { SharedModule } from '../shared/shared.module';
 import { DeleteOrderService } from './services/delete-order.service';
 import { EditOrderService } from './services/edit-order.service';
+import { DeleteCartService } from './services/delete-cart.service';
+import { ModalCartSuccessComponent } from './components/modal-cart-success/modal-cart-success.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { EditOrderService } from './services/edit-order.service';
     ModalRegisterComponent,
     FavoritesComponent,
     OrdersComponent,
+    ModalCartSuccessComponent,
   ],
   imports: [
     UsersRoutingModule,
@@ -45,6 +48,7 @@ import { EditOrderService } from './services/edit-order.service';
     SubmitOrderService,
     DeleteOrderService,
     EditOrderService,
+    DeleteCartService,
   ],
 })
 export class UsersModule {}
