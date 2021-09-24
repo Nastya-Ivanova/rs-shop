@@ -6,7 +6,8 @@ import { ICity } from '../types/city.type';
 
 @Injectable()
 export class GetLocationService {
-  url = 'http:///ip-api.com/json/?lang=ru&fields=city';
+  url =
+    'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=ru';
 
   constructor(private http: HttpClient) {}
 
