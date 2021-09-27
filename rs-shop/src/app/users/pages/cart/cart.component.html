@@ -59,7 +59,8 @@
     >*Длина поля не более 50-ти символов</p>
 
     <label class="cart__order-form-label" for="address">Адрес:</label>
-    <input name="address" ngModel #address="ngModel" id="address" class="cart__order-form-field" type="text" minlength="3" maxlength="250" required>
+    <input name="address" ngModel #address="ngModel" id="address" class="cart__order-form-field"
+           type="text" minlength="3" maxlength="250" required>
     <p *ngIf="address.errors?.required"
        class="cart__order-form-error-message"
     >*Поле обязательно для заполнения</p>

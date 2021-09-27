@@ -20,6 +20,7 @@ import { DeleteOrderService } from './services/delete-order.service';
 import { EditOrderService } from './services/edit-order.service';
 import { DeleteCartService } from './services/delete-cart.service';
 import { ModalCartSuccessComponent } from './components/modal-cart-success/modal-cart-success.component';
+import { ModalOrderSuccessComponent } from './components/modal-order-success/modal-order-success.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ModalCartSuccessComponent } from './components/modal-cart-success/modal
     FavoritesComponent,
     OrdersComponent,
     ModalCartSuccessComponent,
+    ModalOrderSuccessComponent,
   ],
   imports: [
     UsersRoutingModule,

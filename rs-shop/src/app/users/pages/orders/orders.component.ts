@@ -7,14 +7,18 @@ import {
   ElementRef,
   Renderer2,
   OnDestroy,
+  ViewChild,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { UserInfoService } from '../../services/user-info.service';
 import { IUserInfo } from '../../types/user-info';
 import { IItem } from '../../../goods/types/item.type';
 import { GetItemService } from '../../../core/services/get-item.service';
 import { DeleteOrderService } from '../../services/delete-order.service';
 import { EditOrderService } from '../../services/edit-order.service';
+import { ModalOrderSuccessComponent } from '../../components/modal-order-success/modal-order-success.component';
 
 @Component({
   selector: 'app-orders',
@@ -24,6 +28,8 @@ import { EditOrderService } from '../../services/edit-order.service';
 })
 export class OrdersComponent implements OnInit, OnDestroy {
   @ViewChildren('editField') editFields!: QueryList<ElementRef>;
+  @ViewChild('editBtn') editBtn!: ElementRef;
+  @ViewChild('saveBtn') saveBtn!: ElementRef;
   userInfo$!: Observable<IUserInfo>;
   items!: Observable<IItem>[];
   goodsAmount: number[] = [];
@@ -37,6 +43,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     private deleteOrderService: DeleteOrderService,
     private editOrderService: EditOrderService,
     private renderer: Renderer2,
+    private modalLocation: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -56,13 +63,14 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   editOrder() {
-    this.editFields.map((field) => this.renderer.removeAttribute(field.nativeElement, 'disabled'));
+    this.renderer.removeClass(this.editBtn.nativeElement, 'disabled');
+    this.renderer.removeClass(this.saveBtn.nativeElement, 'disabled');
+    this.editFields.map((field) => this.renderer.removeClass(field.nativeElement, 'disabled'));
   }
 
   resetEdit() {
-    this.editFields.map((field) =>
-      this.renderer.setAttribute(field.nativeElement, 'disabled', 'disabled'),
-    );
+    this.renderer.addClass(this.editBtn.nativeElement, 'disabled');
+    this.editFields.map((field) => this.renderer.addClass(field.nativeElement, 'disabled'));
   }
 
   submitEditOrder(
@@ -72,24 +80,34 @@ export class OrdersComponent implements OnInit, OnDestroy {
     phone: string,
     timeToDeliver: string,
     comment: string,
+    orderForm: NgForm,
   ) {
-    this.editOrderService.editOrder({
-      id,
-      details: {
-        name,
-        address,
-        phone,
-        timeToDeliver,
-        comment,
-      },
-    });
-    this.resetEdit();
+    if (orderForm.valid) {
+      this.renderer.removeClass(this.saveBtn.nativeElement, 'disabled');
+      this.editOrderService.editOrder({
+        id,
+        details: {
+          name,
+          address,
+          phone,
+          timeToDeliver,
+          comment,
+        },
+      });
+      this.resetEdit();
+      this.renderer.addClass(this.saveBtn.nativeElement, 'disabled');
+      this.openModalOrderSuccessComponent();
+    }
   }
 
   deleteOrder(id: string) {
     this.deleteOrderService.deleteOrder(id);
     this.userInfoService.getUserInfo();
     this.userInfo$ = this.userInfoService.userInfo$;
+  }
+
+  openModalOrderSuccessComponent() {
+    this.modalLocation.open(ModalOrderSuccessComponent);
   }
 
   ngOnDestroy() {

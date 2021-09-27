@@ -11,6 +11,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .header__btn {
@@ -237,6 +238,14 @@
   color: var(--orange);
 }
 
+.header__wrapper-nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
 .header__logo {
   display: block;
 
@@ -284,7 +293,7 @@
 .header__search-form-wrapper{
   position: relative;
   margin-right: 8px;
-  width: 100%;
+  width: 476px;
 }
 
 .header__search-form {

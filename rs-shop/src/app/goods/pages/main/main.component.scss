@@ -21,4 +21,13 @@
   display: block;
   margin: 30px auto 0;
   border:1px solid var(--light-gray);
+  width:560px;
+  height:315px;
+}
+
+@media(max-width: 800px){
+  .main__video{
+    width:350px;
+    height:105px;
+  }
 }
