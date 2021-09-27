@@ -96,7 +96,7 @@
     <label class="cart__order-form-label" for="comment">Комментарий:</label>
     <textarea name="comment" ngModel #comment="ngModel" id="comment" class="cart__order-form-field" maxlength="250" cols="30" rows="6"></textarea>
 
-    <button (click)="submitOrder(orderForm)" class="cart__order-form-btn">Оформить заказ</button>
+    <button (click)="submitOrder(orderForm)" class="cart__order-form-btn" [disabled]="orderForm.invalid">Оформить заказ</button>
   </form>
 </div>
 

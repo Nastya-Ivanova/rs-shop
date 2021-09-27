@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewChildren,
   QueryList,
+  Renderer2,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgForm } from '@angular/forms';
@@ -42,6 +43,7 @@ export class CartComponent implements OnInit {
     private submitOrderService: SubmitOrderService,
     private deleteCartService: DeleteCartService,
     private modalLocation: MatDialog,
+    private renderer: Renderer2,
   ) {}
 
   ngOnInit() {
@@ -56,12 +58,10 @@ export class CartComponent implements OnInit {
               this.priceArr.push(item.price);
               this.initialPriceArr = [...this.priceArr];
             }),
-            tap(
-              () =>
-                (this.totalPrice = Number(
-                  this.priceArr.reduce((sum, item) => sum + item).toFixed(2),
-                )),
-            ),
+            tap(() => {
+              this.totalPrice = Number(this.priceArr.reduce((sum, item) => sum + item).toFixed(2));
+              return this.totalPrice;
+            }),
           ),
         );
       }

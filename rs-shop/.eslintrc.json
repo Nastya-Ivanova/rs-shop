@@ -44,7 +44,8 @@
         }],
         "no-nested-ternary": "off",
         "class-methods-use-this" : "off",
-        "no-param-reassign": 0
+        "no-param-reassign": 0,
+        "import/no-cycle": 0
       }
     },
     {
