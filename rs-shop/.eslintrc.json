@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base",
+        "prettier"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "import/prefer-default-export": "off",
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "@typescript-eslint/lines-between-class-members": ["error", "always", {
+          "exceptAfterSingleLine": true
+        }],
+        "no-nested-ternary": "off",
+        "class-methods-use-this" : "off",
+        "no-param-reassign": 0,
+        "import/no-cycle": 0
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.d.ts"],
+      "parserOptions": {
+        "project": "tsconfig.spec.json"
+      },
+      "extends": ["plugin:jasmine/recommended"],
+      "plugins": ["jasmine"],
+      "env": { "jasmine": true }
+    }
+  ]
+}

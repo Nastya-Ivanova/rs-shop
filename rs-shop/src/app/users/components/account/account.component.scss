@@ -1,0 +1,91 @@
+.account__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  margin-right: 8px;
+  padding: 0 32px 0 8px;
+
+  height: 42px;
+
+  border: 1px solid var(--light-gray);
+  border-radius: 40px;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    border: 4px solid transparent;
+    border-top: 5px solid var(--black);
+    transition: border-top-color 0.2s ease;
+  }
+}
+
+.account__img {
+  display: block;
+
+  margin-bottom: 12px;
+}
+
+.account__login-btn {
+  margin-bottom: 12px;
+  padding: 10px 24px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: var(--orange);
+  color: var(--white);
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover,
+  &:active {
+    background-color: var(--hover-orange);
+  }
+}
+
+.account__logout-btn{
+  margin-top: 30px;
+}
+
+::ng-deep .mat-menu-item.account__link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  height: 35px;
+  box-sizing: border-box;
+
+  &:hover,
+  &:active {
+    color: var(--orange);
+    background: var(--hover-orange-opacity);
+  }
+}
+
+.account__link span {
+  padding-left: 10px;
+}
+
+.account__user-data{
+  margin-bottom: 10px;
+  padding: 5px 0;
+
+  border-bottom: 1px solid var(--light-gray);
+  width: 90%;
+}
+
+.account__user-name{
+  margin: 0;
+
+  text-align: center;
+  font-weight: bold;
+}

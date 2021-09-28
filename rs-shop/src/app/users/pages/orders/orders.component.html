@@ -1,0 +1,104 @@
+<div class="container orders">
+  <h2 class="orders__header">Лист ожидания</h2>
+  <mat-accordion *ngIf="userInfo$ | async as userInfo">
+    <mat-expansion-panel  *ngFor="let order of userInfo.orders; let i = index"
+                          (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <p class="orders__order">Заказ № {{order.id}}</p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form #orderForm=ngForm class="orders__form">
+        <label for="name" class="orders__label">ФИО:</label>
+        <input #editField name="name" #name="ngModel" [ngModel]="order.details.name"
+               id="name" type="text" minlength="3" maxlength="50" class="orders__form-field disabled" required>
+        <p *ngIf="name.errors?.required"
+           class="orders__form-error-message"
+        >*Поле обязательно для заполнения</p>
+        <p *ngIf="name.errors?.minlength"
+           class="orders__form-error-message"
+        >*Длина поля не менее 3-х символов</p>
+        <p *ngIf="name.value !== null && name.value.length === 50"
+           class="orders__form-error-message"
+        >*Длина поля не более 50-ти символов</p>
+
+        <label for="address" class="orders__label">Адрес:</label>
+        <input #editField name="address" #address="ngModel" [ngModel]="order.details.address"
+               id="address" type="text" class="orders__form-field disabled"  minlength="3" maxlength="250" required>
+        <p *ngIf="address.errors?.required"
+           class="orders__form-error-message"
+        >*Поле обязательно для заполнения</p>
+        <p *ngIf="address.errors?.minlength"
+           class="orders__form-error-message"
+        >*Длина поля не менее 3-х символов</p>
+        <p *ngIf="address.value !== null && address.value.length === 250"
+           class="orders__form-error-message"
+        >*Длина поля не более 250-ти символов</p>
+
+        <label for="phone" class="orders__label">Телефон:</label>
+        <input #editField name="phone" #phone="ngModel" [ngModel]="order.details.phone"
+               pattern="^[+]{1}[0-9]*"
+               id="phone" type="text" class="orders__form-field disabled" placeholder="+7921333333" required>
+        <p *ngIf="phone.errors?.required"
+           class="orders__form-error-message"
+        >*Поле обязательно для заполнения.</p>
+        <p *ngIf="phone.errors?.pattern"
+           class="orders__form-error-message"
+        >*Некорректно заполнено, шаблон +XXXXXXXXX</p>
+
+
+        <label for="date" class="orders__label">Дата доставки:</label>
+        <input #editField name="timeToDeliver" #timeToDeliver="ngModel" [ngModel]="order.details.timeToDeliver"
+               id="date" type="text" class="orders__form-field disabled" required>
+        <p *ngIf="timeToDeliver.errors?.required"
+           class="orders__form-error-message"
+        >*Поле обязательно для заполнения.</p>
+
+
+        <label for="comment" class="orders__label">Комментарий:</label>
+        <input #editField #comment [value]="order.details.comment" id="comment" type="text" class="orders__form-field disabled">
+        <div class="orders__btn-edit-wrapper">
+          <button (click)="editOrder()" class="orders__btn orders__btn--edit">Редактировать заказ</button>
+          <button #editBtn (click)="resetEdit()" class="orders__btn orders__btn--edit disabled">Отменить</button>
+          <button
+            #saveBtn
+            (click)="submitEditOrder(order.id, name.value, address.value, phone.value, timeToDeliver.value, comment.value, orderForm)"
+            class="orders__btn orders__btn--save disabled" [disabled]="orderForm.invalid"
+          >Сохранить</button>
+        </div>
+      </form>
+          <table>
+            <tr class="orders__table-header-row">
+              <th class="orders__table-first-column">Товар</th>
+              <th>Количество</th>
+              <th>Цена, руб.</th>
+              <th>Стоимость, руб.</th>
+            </tr>
+            <ng-container *ngFor="let item of orders[i]; let y = index">
+              <ng-container *ngIf="item | async as good">
+            <tr>
+              <td class="orders__content-wrapper">
+                <img src="{{good.imageUrls[0]}}" class="orders__img" alt="">
+                <p class="orders__name">{{good.name}}</p>
+              </td>
+              <td>
+                <input #amount class="orders__field" [value]="goodsAmount[y]">
+              </td>
+              <td>
+                <input #goodPrice class="orders__field" [value]="good.price">
+              </td>
+              <td>
+                <input class="orders__field" [value]="+goodPrice.value * +amount.value">
+              </td>
+            </tr>
+              </ng-container>
+            </ng-container>
+          </table>
+
+      <button (click)="deleteOrder(order.id)" class="orders__btn orders__btn--delete">Удалить заказ</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+

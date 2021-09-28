@@ -1,0 +1,170 @@
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.orders{
+  margin-bottom: 30px;
+}
+
+.orders__order{
+  margin: 0;
+  font-weight: bold;
+  color: var(--green);
+}
+
+.orders__header{
+  text-align: center;
+  margin: 20px 0;
+}
+
+table{
+  font-size: 12px;
+  border-collapse: collapse;
+}
+
+td,th{
+  padding: 5px;
+  text-align: center;
+}
+
+th{
+  font-weight: normal;
+  color: var(--gray);
+}
+
+.orders__date{
+  margin: 0;
+  font-size: 14px;
+  color: var(--orange);
+}
+
+.orders__content-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &:last-of-type{
+    margin-bottom: 0;
+  }
+}
+
+.orders__img{
+  margin-right: 15px;
+  width: 25px;
+}
+
+.orders__name{
+  font-weight: bold;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.orders__field{
+  text-align: center;
+  padding: 0;
+  border: none;
+
+  &--total{
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--green);
+  }
+}
+
+.orders__total-text{
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  color: var(--green);
+}
+
+.orders__table-total-row{
+  border-top: 1px solid var(--light-gray);
+}
+
+.orders__table-header-row{
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.orders__table-first-column{
+  width: 300px;
+}
+
+.orders__btn{
+  margin-top: 15px;
+  color: var(--white);
+  border:none;
+  border-radius:5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &--edit,
+  &--save{
+    margin-bottom: 30px;
+    margin-right: 20px;
+    background-color: var(--green);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-green);
+    }
+  }
+
+  &--save{
+    margin-right: 0;
+  }
+
+  &--delete{
+    background-color: var(--orange);
+
+    &:hover,
+    &:focus{
+      background-color: var(--hover-orange);
+    }
+  }
+}
+
+.orders__btn--edit.disabled,
+.orders__btn--save.disabled{
+  pointer-events: none;
+  background-color: var(--gray);
+}
+
+.orders__btn--save:disabled{
+  background-color: var(--gray);
+}
+
+.orders__form{
+  display: flex;
+  flex-direction: column;
+}
+
+.orders__label{
+  margin: 0;
+  font-size: 11px;
+  color: var(--gray);
+  pointer-events: none;
+}
+
+.orders__form-field{
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.orders__form-field.disabled{
+  pointer-events: none;
+  color: var(--gray);
+}
+
+.orders__btn-edit-wrapper{
+  display: flex;
+}
+
+.orders__form-error-message {
+  margin: 0;
+
+  font-size: 12px;
+  font-style: italic;
+  color: #d73939;
+}

@@ -1,0 +1,27 @@
+<div class="goods container">
+  <ul class="goods__category-list">
+    <li class="goods__category-separator"></li>
+    <li *ngFor="let category of categories$ | async"
+        (mouseenter)="visibleSubcategory($event, category.id)"
+        class="goods__category-item">
+      <span class="goods__category-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <use [attr.xlink:href]="'assets/img/sprite.svg#' + category.id"></use>
+        </svg>
+      </span>
+      <div class="goods__category-link">{{category.name}}</div>
+        <div
+          #subcategory
+          class="goods__subcategory-wrapper {{category.id}}">
+          <h2 class="goods__subcategory-title">{{category.name}}</h2>
+          <ul class="goods__subcategory-list">
+            <li class="goods__subcategory-item" *ngFor="let subcategory of category.subCategories">
+              <a routerLink="{{category.id}}/{{subcategory.id}}"
+                 class="goods__subcategory-link"
+             >{{subcategory.name}}</a>
+            </li>
+          </ul>
+        </div>
+    </li>
+  </ul>
+</div>

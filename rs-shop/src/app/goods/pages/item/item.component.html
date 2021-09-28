@@ -1,0 +1,60 @@
+<div class="container good">
+  <ul class="good__list">
+    <li *ngIf="item$ | async as item" class="good__item">
+      <div class="good__breadcrumbs">
+        <a routerLink="/goods/{{catNum}}" class="good__breadcrumbs-link">{{categoryName}}</a>
+        <span class="good__breadcrumbs-separator">></span>
+        <a routerLink="/goods/{{catNum}}/{{item.category}}/{{item.subCategory}}"
+
+           class="good__breadcrumbs-link"
+        >{{subcategoryName}}</a>
+
+<!--        [queryParams]="{categoryName: categoryName, subcategoryName: subcategoryName}"-->
+
+        <span class="good__breadcrumbs-separator">></span>
+        <span class="good__breadcrumbs-text">{{item.name}}</span>
+      </div>
+    <div class="good__wrapper">
+      <div class="good__img-wrapper">
+        <ngb-carousel>
+          <ng-template *ngFor="let url of item.imageUrls" ngbSlide>
+            <img [src]="url" alt="Random first slide">
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div class="good__content-wrapper">
+        <p class="good__title">{{item.name}}</p>
+        <p class="good__text">{{item.description}}</p>
+        <p class="good__available-amount">
+              <span [appGoodsAvailableAmount]="item.availableAmount" class="good__available-amount-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <use xlink:href="assets/img/sprite.svg#availableAmount"></use>
+                </svg>
+              </span>
+          <span *ngIf="item.availableAmount > 0">
+                в наличии: {{item.availableAmount}}</span>
+          <span *ngIf="item.availableAmount === 0">нет в наличии</span>
+        </p>
+        <p class="good__rating">
+          <svg *ngFor="let star of [].constructor(item.rating)"
+               width="15" height="14" viewBox="0 0 15 14">
+            <use xlink:href="assets/img/sprite.svg#star"></use>
+          </svg>
+        </p>
+        <p class="good__price">{{item.price | formattingPrice}} руб.</p>
+        <input #btnCart type="button"
+               (click)="addToCart(item.id, btnCart)"
+               class="good__btn good__btn--cart" value="в корзину">
+        <input #btnFavorite type="button"
+               (click)="addToFavorite(item.id, btnFavorite)"
+               class="good__btn good__btn--favorite" value="в избранное">
+        <p class="good__good-icon" [class.visible]="item.rating > 4"></p>
+      </div>
+    </div>
+    </li>
+  </ul>
+</div>
+
+
+
+

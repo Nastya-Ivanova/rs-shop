@@ -1,0 +1,172 @@
+.cart{
+  margin: 30px auto;
+}
+
+.cart__header{
+  text-align: center;
+  margin-bottom: 15px;
+}
+.cart__subheader{
+  margin-bottom: 0;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+}
+
+.cart__order-table tr:first-of-type{
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.cart__order-table tr:last-of-type{
+  border-top: 1px solid var(--light-gray);
+}
+
+.cart__order-table th, td{
+  padding: 5px;
+  width: 20%;
+
+  text-align: center;
+}
+
+.cart__order-column-name{
+  width: 40%;
+}
+
+.cart__order-name-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cart__order-table-img {
+  width: 50px;
+
+  margin-right: 10px;
+}
+
+.cart__order-table-text{
+  text-align: left;
+}
+
+.cart__order-form {
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px 0 30px;
+}
+
+.cart__order-form-error-message {
+  margin: 0;
+
+  font-size: 12px;
+  font-style: italic;
+  color: #d73939;
+}
+
+.cart__order-form-label{
+  display: block;
+
+  margin: 15px 0 0 0;
+  padding-bottom: 4px;
+
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--gray);
+
+  &:first-child{
+    margin-top: 0;
+  }
+}
+
+.cart__order-form-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.cart__order-form-field{
+  width: 400px;
+
+  &--time{
+    width: 120px;
+  }
+}
+
+.cart__order-form-btn{
+  margin-top: 20px;
+
+  width: 130px;
+  padding: 7px;
+
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  background-color: var(--green);
+  cursor: pointer;
+
+  &:disabled{
+    background-color: var(--gray);
+    cursor: auto;
+  }
+}
+
+.cart__order-table-field{
+  width: 40px;
+  padding: 0;
+
+  text-align: center;
+  line-height: 22px;
+  border:1px solid var(--green);
+}
+
+.cart__order-table-btn{
+  width: 30px;
+  height: 24px;
+
+  margin: 0;
+
+  color: var(--white);
+  border: none;
+  background-color: var(--green);
+  cursor: pointer;
+}
+
+.cart__order-table-delivery{
+  list-style: none;
+
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.cart__order-table-price{
+  max-width: 80px;
+  text-align: right;
+  border: none;
+  font-weight: bold;
+}
+
+.cart__order-table-currency{
+  font-weight: bold;
+  margin-right: 50px;
+  margin-left: 5px;
+}
+
+.cart__order-table-icon-delete{
+  color: var(--green);
+  cursor: pointer;
+
+  &:hover,
+  &:focus{
+    color: var(--red);
+  }
+}
+
+.cart__order-table-total{
+  margin: 0;
+
+  font-weight: bold;
+  text-align: right;
+ }

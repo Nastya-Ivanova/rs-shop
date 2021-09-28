@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <div class="container header-container">
+    <div class="header__wrapper">
+      <button (click)="openModalLocation()" class="header__btn header__location-btn">
+        <svg class="header__location-icon" width="10" height="13" viewBox="0 0 10 13">
+          <use xlink:href="assets/img/sprite.svg#location"></use>
+        </svg>
+        <span>{{userCity$ | async}}</span>
+      </button>
+      <ul class="header__list">
+        <li class="header__item"><a class="header__link" href="">Оплата частями</a></li>
+        <li class="header__item"><a class="header__link" href="">Бонусная программа</a></li>
+        <li class="header__item">
+          <button mat-button [matMenuTriggerFor]="submenuPurchaseTerms"
+            class="header__btn header__more-btn"
+          >Еще</button>
+          <mat-menu #submenuPurchaseTerms="matMenu" class="header__submenu">
+            <button class="header__submenu-btn">Оплата</button>
+            <button class="header__submenu-btn">Доставка</button>
+            <button class="header__submenu-btn">Самовывоз</button>
+          </mat-menu>
+        </li>
+      </ul>
+      <ul class="header__list">
+        <li class="header__item">
+          <a class="header__link header__link--viber" href="">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <use xlink:href="assets/img/sprite.svg#viber"></use>
+            </svg>
+            <span>Viber</span>
+          </a>
+        </li>
+        <li class="header__item header__item--phone">+7 954 33 66 77</li>
+        <li class="header__item">
+          <button mat-button [matMenuTriggerFor]="submenuContactsToggle"
+            class="header__btn header__more-btn"
+          >Еще</button>
+          <mat-menu #submenuContactsToggle="matMenu" class="header__submenu">
+            <div class="header__submenu-text">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="assets/img/sprite.svg#phone"></use>
+              </svg>
+              <span>+7 921 33 55 48</span>
+            </div>
+            <button class="header__submenu-btn" mat-menu-item>
+              <svg class="icon-telegram" width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="assets/img/sprite.svg#telegram"></use>
+              </svg>
+              <span>Telegram</span>
+            </button>
+            <button class="header__submenu-btn" mat-menu-item>
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="assets/img/sprite.svg#email"></use>
+              </svg>
+              <span>Почта</span>
+            </button>
+            <button class="header__submenu-btn" mat-menu-item>
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="assets/img/sprite.svg#call"></use>
+              </svg>
+              <span>Заказать звонок</span>
+            </button>
+            <button class="header__submenu-btn" mat-menu-item>
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <use xlink:href="assets/img/sprite.svg#write"></use>
+              </svg>
+              <span>Написать нам</span>
+            </button>
+            <button class="header__submenu-btn" mat-menu-item>
+              <span class="header__submenu-contacts">Контакты</span>
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+      <div class="header__working-time">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <use xlink:href="assets/img/sprite.svg#working-time"></use>
+        </svg>
+        <span class="header__working-time-text">контакт-центр с 8:00 до 22:00</span>
+      </div>
+    </div>
+  </div>
+  <div class="container header-container">
+    <div class="header__wrapper-nav">
+      <a class="header__logo" href="/">
+        <img src="/assets/img/nexperia-logo.svg" width="125" alt="Logo Technique">
+      </a>
+      <button [routerLink]="['goods/0']" class="header__nav-btn header__catalog-btn">Каталог товаров</button>
+      <div class="header__search-form-wrapper">
+        <form class="header__search-form">
+          <input
+            [ngModel]="search$ | async"
+            (ngModelChange)="search$.next($event)"
+
+            name="search"
+            class="header__search-field" type="text" placeholder="Поиск товаров">
+          <button (click)="clearSearchInput()" type="button" class="header__search-close-btn"></button>
+        </form>
+        <ul #searchList [class.hidden]="(searchResult$ | async) === null || ''"
+            class="header__search-list">
+          <li *ngFor="let searchResult of searchResult$ | async"
+              class="header__search-item"
+          >
+            <a (click)="search(searchResult.id)"
+               class="header__search-link"
+            >{{searchResult.name}}</a>
+          </li>
+        </ul>
+      </div>
+      <app-account></app-account>
+      <a routerLink="users/cart" class="header__nav-btn header__card-link">
+        <svg width="17" height="16" viewBox="0 0 17 16">
+          <use xlink:href="assets/img/sprite.svg#cart"></use>
+        </svg>
+        <span>Корзина</span>
+      </a>
+    </div>
+  </div>
+  <div class="header__categories">
+    <ul class="header__categories-list container">
+      <li *ngFor="let category of categories$ | async;let i=index" class="header__categories-item">
+        <a routerLink="goods/{{i}}" class="header__categories-link">{{category.name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

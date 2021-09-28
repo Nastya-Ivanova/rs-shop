@@ -1,0 +1,18 @@
+<div class="modal-location">
+  <h2 class="modal-location__title">Населенный пункт</h2>
+    <p class="modal-location__text">Вам будут показаны товары, а также условия доставки для выбранного населенного пункта.</p>
+    <div class="modal-location__select-wrapper">
+      <label class="modal-location__label" for="location">Населенный пункт</label>
+      <select
+        [ngModel]="selectedValue"
+        (ngModelChange)="selectChange($event)"
+        class="modal-location__select" name="select-location" id="location">
+        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+      </select>
+    </div>
+  <mat-dialog-actions align="end">
+    <button class="modal-location__btn" mat-dialog-close>Отмена</button>
+    <button (click)="setUserCity()" class="modal-location__btn" [mat-dialog-close]="true" cdkFocusInitial>Сохранить</button>
+  </mat-dialog-actions>
+</div>
+

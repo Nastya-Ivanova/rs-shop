@@ -1,0 +1,35 @@
+<button [matMenuTriggerFor]="menu" class="account__btn">
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <use xlink:href="assets/img/sprite.svg#account"></use>
+  </svg>
+  <span>Аккаунт</span>
+</button>
+<mat-menu #menu="matMenu">
+  <div *ngIf="userInfo$ | async as userInfo; else signIn" class="account__user-data">
+    <p class="account__user-name">{{userInfo.firstName}}</p>
+    <p class="account__user-name">{{userInfo.lastName}}</p>
+  </div>
+  <ng-template #signIn>
+    <img class="account__img" src="/assets/img/account-preview.svg" alt="user photo" width="48" height="48">
+    <button (click)="openModalAuth()" class="account__login-btn">Войти</button>
+  </ng-template>
+  <a routerLink="users/cart" class="account__link" mat-menu-item>
+    <svg width="17" height="16" viewBox="0 0 17 16">
+      <use xlink:href="assets/img/sprite.svg#cart"></use>
+    </svg>
+    <span>Корзина</span>
+  </a>
+  <a routerLink="users/favorites" class="account__link" mat-menu-item>
+    <svg width="17" height="17" viewBox="0 0 512 512">
+      <use xlink:href="assets/img/sprite.svg#hearth"></use>
+    </svg>
+    <span>Избранные товары</span>
+  </a>
+  <a routerLink="users/orders" class="account__link" mat-menu-item>
+    <svg width="18" height="18" viewBox="0 0 512 512">
+      <use xlink:href="assets/img/sprite.svg#waitingList"></use>
+    </svg>
+    <span>Лист ожидания</span>
+  </a>
+  <button *ngIf="userInfo$ | async" (click)="logOut()" class="account__logout-btn account__login-btn">Выход</button>
+</mat-menu>
